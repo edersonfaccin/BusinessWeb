@@ -3,21 +3,28 @@ import { Button, Space, Table, Breadcrumb, Modal, Pagination } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import router from 'next/router'
+import { useMutation, useQuery } from '@apollo/client';
 
 interface ICustomList {
   new: string
   report: string
-  rendering: boolean
   columns: any[]
-  data: any[]
-  count: number
-  remove: any
+  method_list: any
+  method_remove: any
 }
 
 const CustomList = (props: ICustomList) => {
 
   const [ open, setOpen ] = useState(false);
   const [ id, setId ] = useState<string>('')
+  const [ removeRecord, { data: del } ] = useMutation(props.method_remove);
+  const { loading, error, data, refetch } = useQuery(props.method_list, { 
+    variables: { 
+      limit: 10, 
+      offset: 0 
+    },
+    notifyOnNetworkStatusChange: true
+  });
   
   const showModal = () => {
     setOpen(true);
@@ -76,7 +83,12 @@ const CustomList = (props: ICustomList) => {
   const confirmRemove = () => {
     hideModal()
 
-    props.remove(id)
+    removeRecord({variables: { _id: id }});
+
+    refetch({
+      limit: 10, 
+      offset: 0
+    })
   }
 
   const onReport = () => {
@@ -90,7 +102,7 @@ const CustomList = (props: ICustomList) => {
       pathname: '/'
     })
   }
-
+console.log(loading)
   return (
     <>
       <Breadcrumb separator=">" style={{
@@ -114,20 +126,20 @@ const CustomList = (props: ICustomList) => {
         cancelText="Cancelar">
         <p>Confirma remocao do registro?</p>
       </Modal>
-      
+
       <Table 
         columns={columns} 
-        dataSource={props.data}
-        loading={props.rendering}
+        dataSource={data ? data[Object.keys(data)[0]].results : []}
+        loading={loading}
         pagination={false}
       />
 
       <Pagination 
         defaultCurrent={3} 
-        total={props.count} 
+        total={data ? data[Object.keys(data)[0]].count : 0} 
         showSizeChanger={false}
         showQuickJumper={false}
-        showTotal={total => `Total ${props.count} items`}
+        showTotal={total => `Total ${data ? data[Object.keys(data)[0]].count : 0} items`}
       />
     </>
   )

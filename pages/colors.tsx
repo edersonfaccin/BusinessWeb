@@ -1,5 +1,4 @@
 import React from 'react';
-import { useMutation, useQuery } from '@apollo/client';
 import CustomList from '../src/components/customList';
 import { LIST_COLORS, REMOVE_COLOR } from '../src/graphql/color';
 import CustomMenu from '../src/utils/customMenu';
@@ -7,14 +6,6 @@ import { format } from 'date-fns';
 import { Tag } from 'antd';
 
 const Colors = () => {
-
-  const [ removeColor, { data: del } ] = useMutation(REMOVE_COLOR);
-  const { loading, error, data, refetch } = useQuery(LIST_COLORS, { 
-    variables: { 
-      limit: 10, 
-      offset: 0 
-    }
-  });
 
   const columns = [{
     title: 'Name',
@@ -35,25 +26,14 @@ const Colors = () => {
     }
   }]
 
-  const remove = (_id: string) => {
-    removeColor({variables: { _id: _id }});
-
-    refetch({
-      limit: 10, 
-      offset: 0 
-    })
-  }
-
   return (
     <CustomMenu>
       <CustomList 
         new={'color'} 
-        report={'color_report'} 
-        rendering={loading}
+        report={'color_report'}
         columns={columns}
-        data={data?.colorspage?.results}
-        count={data?.colorspage?.count}
-        remove={remove}
+        method_list={LIST_COLORS}
+        method_remove={REMOVE_COLOR}
       />
     </CustomMenu>
   )
