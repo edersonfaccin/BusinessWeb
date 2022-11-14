@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Space, Table, Breadcrumb, Modal } from 'antd';
+import { Button, Space, Table, Breadcrumb, Modal, Pagination } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import router from 'next/router'
@@ -10,6 +10,7 @@ interface ICustomList {
   rendering: boolean
   columns: any[]
   data: any[]
+  count: number
   remove: any
 }
 
@@ -110,15 +111,23 @@ const CustomList = (props: ICustomList) => {
         onOk={confirmRemove}
         onCancel={hideModal}
         okText="Confirmar"
-        cancelText="Cancelar"
-      >
+        cancelText="Cancelar">
         <p>Confirma remocao do registro?</p>
       </Modal>
       
       <Table 
         columns={columns} 
-        dataSource={props.data} 
+        dataSource={props.data}
         loading={props.rendering}
+        pagination={false}
+      />
+
+      <Pagination 
+        defaultCurrent={3} 
+        total={props.count} 
+        showSizeChanger={false}
+        showQuickJumper={false}
+        showTotal={total => `Total ${props.count} items`}
       />
     </>
   )

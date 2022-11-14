@@ -51,7 +51,8 @@ const Colors = () => {
         report={'color_report'} 
         rendering={loading}
         columns={columns}
-        data={data?.colorspage}
+        data={data?.colorspage?.results}
+        count={data?.colorspage?.count}
         remove={remove}
       />
     </CustomMenu>

@@ -8,10 +8,13 @@ export const LIST_COLORS = gql`
         offset: $offset
       }
     ) {
-      _id
-      name
-      date_register
-      active
+      results {
+        _id
+        name
+        date_register
+        active
+      }
+      count
     }
   }
 `;
