@@ -29,9 +29,7 @@ const Color = () => {
       setData(dataRetrieve?.color)
     }
 
-    setTimeout(() => {
-      setRendering(false)
-    }, router.query?._id ? 1500 : 0);
+    setRendering(false)
   }, [loading])
 
   const onSave = async(values: any) => {
@@ -53,39 +51,36 @@ const Color = () => {
 
   return (
     <CustomMenu>
-      {
-        rendering ? null : (
-          <Formik
-            validationSchema={colorValidationSchema}
-            validateOnMount={true}
-            initialValues={data}
-            onSubmit={values => onSave(values)}>
-              {({ handleSubmit, values, errors, touched, setFieldValue }) => {
-                return (
-                  <CustomForm rendering={rendering} onSave={handleSubmit} list='colors'>
-                    <TextInput 
-                      label='Nome' 
-                      value={values?.name} 
-                      required={true}
-                      onChange={(ev: any) => {
-                        setFieldValue('name', ev.target.value)
-                      }}
-                      invalid={(errors?.name || '').toString().length > 0 && !!touched?.name}
-                      textError={errors?.name?.toString()}
-                    />
-                    <SwitchInput 
-                      label='Ativo' 
-                      value={values?.active} 
-                      onChange={(ev: any) => {
-                        setFieldValue('active', ev)
-                      }}
-                    />
-                  </CustomForm>
-                )
-              }}
-          </Formik>
-        )
-      }
+      <Formik
+        validationSchema={colorValidationSchema}
+        validateOnMount={true}
+        initialValues={data}
+        enableReinitialize
+        onSubmit={values => onSave(values)}>
+          {({ handleSubmit, values, errors, touched, setFieldValue }) => {
+            return (
+              <CustomForm rendering={rendering} onSave={handleSubmit} list='colors'>
+                <TextInput 
+                  label='Nome' 
+                  value={values?.name} 
+                  required={true}
+                  onChange={(ev: any) => {
+                    setFieldValue('name', ev.target.value)
+                  }}
+                  invalid={(errors?.name || '').toString().length > 0 && !!touched?.name}
+                  textError={errors?.name?.toString()}
+                />
+                <SwitchInput 
+                  label='Ativo' 
+                  value={values?.active} 
+                  onChange={(ev: any) => {
+                    setFieldValue('active', ev)
+                  }}
+                />
+              </CustomForm>
+            )
+          }}
+      </Formik>
     </CustomMenu>
   )
 }

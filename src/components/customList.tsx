@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Breadcrumb, Modal, Pagination } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -17,14 +17,24 @@ const CustomList = (props: ICustomList) => {
 
   const [ open, setOpen ] = useState(false);
   const [ id, setId ] = useState<string>('')
+  const [ page, setPage ] = useState<number>(1)
+  const [ count, setCount ]  = useState<number>(0)
+  const [ records, setRecords ] = useState<any>([])
   const [ removeRecord, { data: del } ] = useMutation(props.method_remove);
   const { loading, error, data, refetch } = useQuery(props.method_list, { 
     variables: { 
       limit: 10, 
-      offset: 0 
+      offset: ((page - 1) * 10)
     },
     notifyOnNetworkStatusChange: true
   });
+
+  useEffect(() => {
+    const auxCount =data ? data[Object.keys(data)[0]].count : 0
+
+    setCount(auxCount)
+    setRecords(data ? data[Object.keys(data)[0]].results : [])
+  }, [data])
   
   const showModal = () => {
     setOpen(true);
@@ -38,7 +48,7 @@ const CustomList = (props: ICustomList) => {
     title: 'Edit',
     key: 'action',
     render: (_: any, record: any) => (
-      <Space size="middle">
+      <Space size="small">
         <EditOutlined onClick={() => onEdit(record)} style={{
           color: 'blue',
           cursor: 'pointer'
@@ -51,7 +61,7 @@ const CustomList = (props: ICustomList) => {
     title: 'Remove',
     key: 'action',
     render: (_: any, record: any) => (
-      <Space size="middle">
+      <Space size="small">
         <DeleteOutlined onClick={() => onRemove(record)} style={{
           color: 'red',
           cursor: 'pointer'
@@ -102,7 +112,7 @@ const CustomList = (props: ICustomList) => {
       pathname: '/'
     })
   }
-console.log(loading)
+
   return (
     <>
       <Breadcrumb separator=">" style={{
@@ -129,17 +139,18 @@ console.log(loading)
 
       <Table 
         columns={columns} 
-        dataSource={data ? data[Object.keys(data)[0]].results : []}
+        dataSource={records}
         loading={loading}
         pagination={false}
       />
 
       <Pagination 
-        defaultCurrent={3} 
-        total={data ? data[Object.keys(data)[0]].count : 0} 
+        defaultCurrent={page > 0 ? page : 1} 
+        total={count} 
         showSizeChanger={false}
         showQuickJumper={false}
-        showTotal={total => `Total ${data ? data[Object.keys(data)[0]].count : 0} items`}
+        showTotal={total => `Total ${count} items`}
+        onChange={(newPage) => setPage(newPage)}
       />
     </>
   )
