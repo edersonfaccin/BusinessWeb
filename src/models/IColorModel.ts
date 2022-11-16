@@ -16,7 +16,8 @@ export const IColorDefault = <IColorModel> {
 export const colorValidationSchema = yup.object().shape({
     name: yup
       .string()
-      .required('Nome da cor é obrigatório'),
+      .required('Nome da cor é obrigatório')
+      .max(50, 'Maximo 50 caracteres'),
     active: yup
       .boolean()
       .required()

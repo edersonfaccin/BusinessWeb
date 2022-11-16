@@ -3,14 +3,18 @@ import { Button, Space, Table, Breadcrumb, Modal, Pagination } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import router from 'next/router'
-import { useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { GeneratePDF } from '../utils/printerUtil';
 
 interface ICustomList {
   new: string
   report: string
   columns: any[]
+  columnsReport: any[]
   method_list: any
   method_remove: any
+  method_report: any
+  titleReport: string
 }
 
 const CustomList = (props: ICustomList) => {
@@ -28,6 +32,15 @@ const CustomList = (props: ICustomList) => {
     },
     notifyOnNetworkStatusChange: true
   });
+  const [ loadReport, { 
+    //loading: loadingReport, 
+    error: errorReport, 
+    data: dataReport
+  }] = useLazyQuery(props.method_report, {
+    variables: {},
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'no-cache'
+  });
 
   useEffect(() => {
     const auxCount =data ? data[Object.keys(data)[0]].count : 0
@@ -35,6 +48,12 @@ const CustomList = (props: ICustomList) => {
     setCount(auxCount)
     setRecords(data ? data[Object.keys(data)[0]].results : [])
   }, [data])
+
+  useEffect(()  => {
+    if(dataReport?.colors.length > 0) {
+      GeneratePDF(props.titleReport, props.columnsReport, dataReport?.colors, [], true)
+    }
+  }, [dataReport?.colors])
   
   const showModal = () => {
     setOpen(true);
@@ -102,9 +121,7 @@ const CustomList = (props: ICustomList) => {
   }
 
   const onReport = () => {
-    router.push({
-      pathname: props.report
-    })
+    loadReport()
   }
 
   const onGoToHome = () => {

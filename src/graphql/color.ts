@@ -1,5 +1,15 @@
 import { gql } from '@apollo/client';
 
+export const REPORT_COLORS = gql`
+  query{
+    colors{
+      name
+      active
+      date_register
+    }
+  }
+`;
+
 export const LIST_COLORS = gql`
   query colorspage($limit: Float!, $offset: Float!) {
     colorspage(

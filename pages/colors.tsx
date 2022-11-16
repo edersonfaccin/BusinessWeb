@@ -1,11 +1,31 @@
 import React from 'react';
 import CustomList from '../src/components/customList';
-import { LIST_COLORS, REMOVE_COLOR } from '../src/graphql/color';
+import { LIST_COLORS, REMOVE_COLOR, REPORT_COLORS } from '../src/graphql/color';
 import CustomMenu from '../src/utils/customMenu';
 import { format } from 'date-fns';
 import { Tag } from 'antd';
 
 const Colors = () => {
+
+  const columnsReport = [{
+    field: 'name',
+    label: 'Nome',
+    position: 'left',
+    type: 'string',
+    width: '*'
+  }, {
+    field: 'date_register',
+    label: 'Data registro',
+    position: 'center',
+    type: 'datetime',
+    width: 80
+  }, {
+    field: 'active',
+    label: 'Ativo',
+    position: 'left',
+    type: 'boolean',
+    width: 80
+  }]
 
   const columns = [{
     title: 'Name',
@@ -34,6 +54,9 @@ const Colors = () => {
         columns={columns}
         method_list={LIST_COLORS}
         method_remove={REMOVE_COLOR}
+        method_report={REPORT_COLORS}
+        columnsReport={columnsReport}
+        titleReport={'Relatório de Cores'}
       />
     </CustomMenu>
   )
