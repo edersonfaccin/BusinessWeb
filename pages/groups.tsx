@@ -1,11 +1,11 @@
 import React from 'react';
 import CustomList from '../src/components/customList';
-import { LIST_COLORS, REMOVE_COLOR, REPORT_COLORS } from '../src/graphql/color';
+import { LIST_GROUPS, REMOVE_GROUP, REPORT_GROUPS } from '../src/graphql/group';
 import CustomMenu from '../src/utils/customMenu';
 import { format } from 'date-fns';
 import { Tag } from 'antd';
 
-const Colors = () => {
+const Groups = () => {
 
   const columnsReport = [{
     field: 'name',
@@ -49,16 +49,16 @@ const Colors = () => {
   return (
     <CustomMenu>
       <CustomList 
-        new={'color'} 
+        new={'group'} 
         columns={columns}
-        method_list={LIST_COLORS}
-        method_remove={REMOVE_COLOR}
-        method_report={REPORT_COLORS}
+        method_list={LIST_GROUPS}
+        method_remove={REMOVE_GROUP}
+        method_report={REPORT_GROUPS}
         columnsReport={columnsReport}
-        titleReport={'Relatório de Cores'}
+        titleReport={'Relatório de Grupos'}
       />
     </CustomMenu>
   )
 }
 
-export default Colors
+export default Groups

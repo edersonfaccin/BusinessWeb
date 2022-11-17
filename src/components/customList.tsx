@@ -8,7 +8,6 @@ import { GeneratePDF } from '../utils/printerUtil';
 
 interface ICustomList {
   new: string
-  report: string
   columns: any[]
   columnsReport: any[]
   method_list: any
@@ -42,17 +41,17 @@ const CustomList = (props: ICustomList) => {
   });
 
   useEffect(() => {
-    const auxCount =data ? data[Object.keys(data)[0]].count : 0
+    const auxCount = data ? data[Object.keys(data)[0]].count : 0
 
     setCount(auxCount)
     setRecords(data ? data[Object.keys(data)[0]].results : [])
   }, [data])
 
   useEffect(()  => {
-    if(dataReport?.colors.length > 0) {
-      GeneratePDF(props.titleReport, props.columnsReport, dataReport?.colors, [], true)
+    if(dataReport) {
+      GeneratePDF(props.titleReport, props.columnsReport, dataReport ? dataReport[Object.keys(dataReport)[0]] : [], [], true)
     }
-  }, [dataReport?.colors])
+  }, [dataReport])
   
   const showModal = () => {
     setOpen(true);

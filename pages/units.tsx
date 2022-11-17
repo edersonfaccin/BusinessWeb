@@ -1,11 +1,11 @@
 import React from 'react';
 import CustomList from '../src/components/customList';
-import { LIST_COLORS, REMOVE_COLOR, REPORT_COLORS } from '../src/graphql/color';
+import { LIST_UNITS, REMOVE_UNIT, REPORT_UNITS } from '../src/graphql/unit';
 import CustomMenu from '../src/utils/customMenu';
 import { format } from 'date-fns';
 import { Tag } from 'antd';
 
-const Colors = () => {
+const Units = () => {
 
   const columnsReport = [{
     field: 'name',
@@ -13,6 +13,12 @@ const Colors = () => {
     position: 'left',
     type: 'string',
     width: '*'
+  }, {
+    field: 'initials',
+    label: 'Sigla',
+    position: 'left',
+    type: 'string',
+    width: 80
   }, {
     field: 'date_register',
     label: 'Data registro',
@@ -30,6 +36,9 @@ const Colors = () => {
   const columns = [{
     title: 'Name',
     dataIndex: 'name'
+  }, {
+    title: 'Sigla',
+    dataIndex: 'initials'
   }, {
     title: 'Active',
     dataIndex: 'active',
@@ -49,16 +58,16 @@ const Colors = () => {
   return (
     <CustomMenu>
       <CustomList 
-        new={'color'} 
+        new={'unit'} 
         columns={columns}
-        method_list={LIST_COLORS}
-        method_remove={REMOVE_COLOR}
-        method_report={REPORT_COLORS}
+        method_list={LIST_UNITS}
+        method_remove={REMOVE_UNIT}
+        method_report={REPORT_UNITS}
         columnsReport={columnsReport}
-        titleReport={'Relatório de Cores'}
+        titleReport={'Relatório de Unidades'}
       />
     </CustomMenu>
   )
 }
 
-export default Colors
+export default Units

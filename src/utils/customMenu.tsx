@@ -48,7 +48,7 @@ export default function CustomMenu(props: any) {
                 icon: <DeploymentUnitOutlined />,
                 label: 'Unidades'
               }, {
-                key: 'categories',
+                key: 'categorys',
                 icon: <UngroupOutlined />,
                 label: 'Categorias'
               }, {
