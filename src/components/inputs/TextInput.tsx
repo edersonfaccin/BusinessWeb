@@ -1,6 +1,8 @@
 import React from 'react';
-import { Form, Input } from 'antd';
+import { Form, Input, Typography  } from 'antd';
 import { IInput } from '../../interfaces/IForm';
+
+const { Text } = Typography;
 
 const TextInput = (props: IInput) => {
 
@@ -13,9 +15,12 @@ const TextInput = (props: IInput) => {
                 <Input 
                     value={props.value} 
                     onChange={props.onChange}
-                    status={props?.invalid ? "error" : ""}
-                    placeholder={props?.textError}
                 />
+                {
+                    props?.textError && props?.invalid ? (
+                        <Text type="danger">{props?.textError}</Text>
+                    ) : null
+                }
         </Form.Item>
     )
 };

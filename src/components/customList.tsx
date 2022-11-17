@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Breadcrumb, Modal, Pagination } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, PrinterOutlined, PlusOutlined } from '@ant-design/icons';
 import router from 'next/router'
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { GeneratePDF } from '../utils/printerUtil';
@@ -140,8 +140,18 @@ const CustomList = (props: ICustomList) => {
           <Breadcrumb.Item>Lista</Breadcrumb.Item>
       </Breadcrumb>
       <Space style={{ marginBottom: 16 }}>
-          <Button onClick={onNew}>Novo</Button>
-          <Button onClick={onReport}>Relatório</Button>
+          <Button 
+            type={'primary'} 
+            icon={<PlusOutlined />}
+            onClick={onNew}>
+              Novo
+            </Button>
+          <Button 
+            type={'default'} 
+            icon={<PrinterOutlined />}
+            onClick={onReport}>
+              Relatório
+            </Button>
       </Space>
 
       <Modal
