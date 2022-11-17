@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, MonitorOutlined, 
-  VideoCameraOutlined, BgColorsOutlined, CodeSandboxOutlined,
+  BgColorsOutlined, CodeSandboxOutlined,
   DeploymentUnitOutlined, UngroupOutlined, GroupOutlined,
   MoneyCollectOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';

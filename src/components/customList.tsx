@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Breadcrumb, Modal, Pagination } from 'antd';
+import { Button, Space, Table, Breadcrumb, Modal, Pagination, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { EditOutlined, DeleteOutlined, PrinterOutlined, PlusOutlined } from '@ant-design/icons';
 import router from 'next/router'
@@ -33,7 +33,6 @@ const CustomList = (props: ICustomList) => {
     notifyOnNetworkStatusChange: true
   });
   const [ loadReport, { 
-    //loading: loadingReport, 
     error: errorReport, 
     data: dataReport
   }] = useLazyQuery(props.method_report, {
@@ -110,14 +109,19 @@ const CustomList = (props: ICustomList) => {
   }
 
   const confirmRemove = () => {
-    hideModal()
+    try {
+      hideModal()
 
-    removeRecord({variables: { _id: id }});
+      removeRecord({variables: { _id: id }});
 
-    refetch({
-      limit: 10, 
-      offset: 0
-    })
+      refetch({
+        limit: 10, 
+        offset: 0
+      })
+    } catch (error) {
+      hideModal()
+      message.error(error?.toString());
+    }
   }
 
   const onReport = () => {

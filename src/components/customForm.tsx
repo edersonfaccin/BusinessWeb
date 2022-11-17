@@ -3,17 +3,6 @@ import { Breadcrumb, Button, Form, Spin } from 'antd';
 import { CheckOutlined, LoadingOutlined } from '@ant-design/icons';
 import router from 'next/router'
 
-const validateMessages = {
-    required: '${label} is required!',
-    types: {
-        email: '${label} is not a valid email!',
-        number: '${label} is not a valid number!',
-    },
-    number: {
-        range: '${label} must be between ${min} and ${max}',
-    },
-};
-
 interface ICustomForm {
   children: any
   rendering: boolean
@@ -50,7 +39,6 @@ const CustomForm = (props: ICustomForm) => {
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 14 }}
         layout="horizontal"
-        validateMessages={validateMessages}
         size={"middle"}>
           {
             <Spin tip="Aguarde" spinning={props.rendering}>

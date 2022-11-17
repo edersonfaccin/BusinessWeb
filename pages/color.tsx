@@ -8,6 +8,7 @@ import { colorValidationSchema, IColorDefault, IColorModel } from '../src/models
 import { CREATE_COLOR, GET_COLOR, UPDATE_COLOR } from '../src/graphql/color';
 import { useRouter } from 'next/router';
 import { useMutation, useQuery } from '@apollo/client';
+import { message } from 'antd';
 
 const Color = () => {
   const router = useRouter()
@@ -45,7 +46,7 @@ const Color = () => {
       setRendering(false)
       router.back()
     } catch (error) {
-      console.log(1, error)
+      message.error(error?.toString());
     }
   }
 
