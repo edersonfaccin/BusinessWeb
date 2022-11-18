@@ -8,8 +8,8 @@ export interface ISignInModel {
 
 export const ISignInDefault = <ISignInModel> {
     _id: '',
-    email: '',
-    password: ''
+    email: 'edersonfrasson@gmail.com',
+    password: '1234'
 }
 
 export const signinValidationSchema = yup.object().shape({

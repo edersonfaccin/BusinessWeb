@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Breadcrumb, Modal, Pagination, message } from 'antd';
+import { Button, Space, Table, Breadcrumb, Modal, Pagination, message, Row, Col } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { EditOutlined, DeleteOutlined, PrinterOutlined, PlusOutlined } from '@ant-design/icons';
 import router from 'next/router'
@@ -174,14 +174,21 @@ const CustomList = (props: ICustomList) => {
         pagination={false}
       />
 
-      <Pagination 
-        defaultCurrent={page > 0 ? page : 1} 
-        total={count} 
-        showSizeChanger={false}
-        showQuickJumper={false}
-        showTotal={total => `Total ${count} items`}
-        onChange={(newPage) => setPage(newPage)}
-      />
+      <Row justify="end">
+        <Col span={12}/>
+        <Col span={12} align={"end"} style={{
+          padding: 30
+        }}>
+          <Pagination 
+            defaultCurrent={page > 0 ? page : 1} 
+            total={count} 
+            showSizeChanger={false}
+            showQuickJumper={false}
+            showTotal={total => `Total ${count} items`}
+            onChange={(newPage) => setPage(newPage)}
+          />
+        </Col>
+      </Row>
     </>
   )
 }

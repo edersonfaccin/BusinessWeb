@@ -28,9 +28,7 @@ export const LOGIN_USER = gql`
         _id
         name
         email
-        password
-        active
-        date_register
+        access_token
     }
   }
 `;
