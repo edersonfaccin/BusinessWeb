@@ -35,7 +35,7 @@ export default function CustomMenu(props: any) {
             <Menu
               theme="dark"
               mode="inline"
-              //defaultSelectedKeys={['colors']}
+              defaultSelectedKeys={['']}
               onClick={ev => onRoute(ev.key)}
               items={[{
                 key: 'group-stock',
