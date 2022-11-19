@@ -5,6 +5,7 @@ import { EditOutlined, DeleteOutlined, PrinterOutlined, PlusOutlined } from '@an
 import router from 'next/router'
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { GeneratePDF } from '../utils/printerUtil';
+import useAuthData from '../data/hook/useAuthData';
 
 interface ICustomList {
   new: string
@@ -17,14 +18,18 @@ interface ICustomList {
 }
 
 const CustomList = (props: ICustomList) => {
+  const { user } = useAuthData()
 
   const [ open, setOpen ] = useState(false);
   const [ id, setId ] = useState<string>('')
   const [ page, setPage ] = useState<number>(1)
   const [ count, setCount ]  = useState<number>(0)
   const [ records, setRecords ] = useState<any>([])
-  const [ removeRecord, { data: del } ] = useMutation(props.method_remove);
-  const { loading, error, data, refetch } = useQuery(props.method_list, { 
+  const [ removeRecord ] = useMutation(props.method_remove, {
+    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
+  });
+  const { loading, error, data, refetch } = useQuery(props.method_list, {
+    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
     variables: { 
       limit: 10, 
       offset: ((page - 1) * 10)
@@ -35,6 +40,7 @@ const CustomList = (props: ICustomList) => {
     error: errorReport, 
     data: dataReport
   }] = useLazyQuery(props.method_report, {
+    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
     variables: {},
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'no-cache'
@@ -42,10 +48,15 @@ const CustomList = (props: ICustomList) => {
 
   useEffect(() => {
     const auxCount = data ? data[Object.keys(data)[0]].count : 0
+    const results = data ? data[Object.keys(data)[0]].results : []
 
-    setCount(auxCount)
-    setRecords(data ? data[Object.keys(data)[0]].results : [])
-  }, [data])
+    if(error){
+      message.error(error.message, 6);
+    }else{
+      setCount(auxCount)
+      setRecords(results)
+    }
+  }, [data, error])
 
   useEffect(()  => {
     if(dataReport) {

@@ -2,8 +2,7 @@ import { createContext, useState } from "react";
 import route from 'next/router'
 import Cookies from 'js-cookie'
 import { LOGIN_USER } from "../../graphql/user";
-import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, useMutation } from "@apollo/client";
-import { api } from "../../utils/environment";
+import { useMutation } from "@apollo/client";
 import { message } from "antd";
 
 interface ISignInModel {
@@ -23,6 +22,7 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
 
 export const AuthProvider = ({ children }: any) => {
+
     const [ user, setUser ] = useState<ISignInModel>(() => {
         const _id = Cookies.get('@BusinessApp:_id');
         const name = Cookies.get('@BusinessApp:name');
@@ -30,18 +30,20 @@ export const AuthProvider = ({ children }: any) => {
         const access_token = Cookies.get('@BusinessApp:access_token');
 
         if (access_token && _id) {
-            // para não precisar ficar passando no header das requisições a api
-            /*api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-                return { token, user: JSON.parse(user) };
-            */
+           return {
+                _id,
+                name,
+                email,
+                access_token
+           }
         }
       
         return { } as ISignInModel;
     });
+
     const [ loading, setLoading ] = useState<boolean>(false)
     const [ errorMessage, setErrorMessage ] = useState<string>()
     const [ login ] = useMutation(LOGIN_USER);
-    const httpLink = new HttpLink({ uri: api });
 
     const signIn = async(email: string, password: string) => {
         const data = {
@@ -63,6 +65,7 @@ export const AuthProvider = ({ children }: any) => {
                     Cookies.set('@BusinessApp:access_token', access_token, { expires: 1 });
     
                     setUser(result?.data?.login)
+
                     route.push('/')
                 }else{
                     message.error('Usuario ou senha incorretos');
@@ -76,23 +79,6 @@ export const AuthProvider = ({ children }: any) => {
             setLoading(false)
         } 
     }
-
-    const authLink = new ApolloLink((operation, forward) => {
-        const token = Cookies.get('@BusinessApp:access_token');
-        
-        operation.setContext({
-          headers: {
-            authorization: token ? `Bearer ${token}` : ''
-          }
-        });
-
-        return forward(operation);
-    });
-
-    const client = new ApolloClient({
-        link: authLink.concat(httpLink),
-        cache: new InMemoryCache()
-    });
 
     return (
         <AuthContext.Provider value={{
