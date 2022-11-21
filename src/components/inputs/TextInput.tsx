@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Typography  } from 'antd';
+import { Form, Input, Typography } from 'antd';
 import { IInput } from '../../interfaces/IForm';
 
 const { Text } = Typography;
@@ -9,10 +9,12 @@ const TextInput = (props: IInput) => {
     return (
         <Form.Item 
             label={props.label}
-            rules={[{
-                required: props.required || false,
-            }]}>
+            colon={false}
+            rules={props?.rules}>
                 <Input 
+                    style={{ 
+                        borderRadius: 8
+                    }}
                     value={props.value} 
                     onChange={props.onChange}
                 />

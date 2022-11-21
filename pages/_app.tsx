@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const client = new ApolloClient({
     uri: api,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache()
   });
 
   return (

@@ -10,6 +10,7 @@ const PasswordInput = (props: IInput) => {
     return (
         <Form.Item 
             label={props.label}
+            colon={false}
             rules={[{
                 required: props.required || false,
             }]}>

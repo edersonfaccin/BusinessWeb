@@ -6,8 +6,8 @@ const NumberInput = (props: IInput) => {
     
     return (
         <Form.Item 
-            //name={[props.collection, props.field]}
             label={props.label}
+            colon={false}
             rules={[{
                 required: props.required,
             }]}>

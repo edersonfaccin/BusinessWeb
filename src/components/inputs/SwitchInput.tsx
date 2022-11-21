@@ -6,8 +6,8 @@ const SwitchInput = (props: IInput) => {
     
     return (
         <Form.Item
-            //valuePropName={props.value}
             label={props.label}
+            colon={false}
             rules={[{
                 required: props.required,
             }]}>
