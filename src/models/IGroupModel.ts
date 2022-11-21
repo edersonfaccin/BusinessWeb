@@ -1,10 +1,7 @@
-import * as yup from 'yup'
-
-export interface IGroupModel {
+interface IGroupModel {
     _id: string,
     name: string,
-    active: boolean,
-    //idcompany: string
+    active: boolean
 }
 
 export const IGroupDefault = <IGroupModel> {
@@ -13,13 +10,12 @@ export const IGroupDefault = <IGroupModel> {
     active: true
 }
 
-export const groupValidationSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required('Nome da grupo é obrigatório')
-      .max(50, 'Maximo 50 caracteres'),
-    active: yup
-      .boolean()
-      .required()
-      .default(true)
-})
+export const groupRules = {
+  name: [{
+    required: true, 
+    message: 'Informe um nome do grupo'
+  }, {
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }]
+}

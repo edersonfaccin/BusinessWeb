@@ -1,10 +1,7 @@
 export interface IInput {
-    label: string
-    required?: boolean
-    value: any
-    onChange: any
-    invalid?: boolean
-    textError?: string
+    property: any
+    label?: string
+    rules?: any[]
 }
 
 export interface IListSelect {

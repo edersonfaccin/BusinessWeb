@@ -8,10 +8,9 @@ const SwitchInput = (props: IInput) => {
         <Form.Item
             label={props.label}
             colon={false}
-            rules={[{
-                required: props.required,
-            }]}>
-            <Switch onChange={props.onChange} checked={props.value}/>
+            name={props.property}
+            rules={props.rules}>
+            <Switch defaultChecked/>
         </Form.Item>
     );
 };

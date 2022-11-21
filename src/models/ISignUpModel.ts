@@ -1,6 +1,4 @@
-import * as yup from 'yup'
-
-export interface ISignUpModel {
+interface ISignUpModel {
     _id: string,
     email: string,
     password: string,
@@ -14,20 +12,26 @@ export const ISignUpDefault = <ISignUpModel> {
     confirm_password: ''
 }
 
-export const signinValidationSchema = yup.object().shape({
-    email: yup
-      .string()
-      .required('Email é obrigatório')
-      .max(50, 'Maximo 50 caracteres')
-      .email('Informe um email valido'),
-    password: yup
-      .string()
-      .required('Senha é obrigatório')
-      .max(50, 'Maximo 50 caracteres')
-      .min(4, 'Minimo quatro caracteres'),
-    confirm_password: yup
-      .string()
-      .required('Senha é obrigatório')
-      .max(50, 'Maximo 50 caracteres')
-      .min(4, 'Minimo quatro caracteres')
-})
+export const signupRules = {
+  email: [{
+    required: true, 
+    message: 'Informe um nome do usuario'
+  }, {
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  password: [{
+    required: true, 
+    message: 'Informe um password do usuario'
+  }, {
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  confirm_password: [{
+    required: true, 
+    message: 'Informe um password do usuario'
+  }, {
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }]
+}

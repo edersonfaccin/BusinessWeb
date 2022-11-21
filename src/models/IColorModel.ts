@@ -1,10 +1,7 @@
-import * as yup from 'yup'
-
-export interface IColorModel {
+interface IColorModel {
     _id: string,
     name: string,
-    active: boolean,
-    //idcompany: string
+    active: boolean
 }
 
 export const IColorDefault = <IColorModel> {
@@ -13,13 +10,12 @@ export const IColorDefault = <IColorModel> {
     active: true
 }
 
-export const colorValidationSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required('Nome da cor é obrigatório')
-      .max(50, 'Maximo 50 caracteres'),
-    active: yup
-      .boolean()
-      .required()
-      .default(true)
-})
+export const colorRules = {
+  name: [{
+    required: true, 
+    message: 'Informe um nome da cor'
+  }, {
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }]
+}

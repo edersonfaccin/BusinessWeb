@@ -1,5 +1,3 @@
-import * as yup from 'yup'
-
 interface IUserModel {
     _id: string,
     iduser: string,
@@ -46,54 +44,64 @@ export const ICompanyDefault = <ICompanyModel> {
     active: true
 }
 
-export const companyValidationSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required('Nome da companhia é obrigatório')
-      .max(50, 'Maximo 50 caracteres'),
-    nick_name: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    national_identifier: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    state_identifier: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    municipal_identifier: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    address: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    complement: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    district: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    zip_code: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    city: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    phone: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    cellphone: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    email: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    contact: yup
-      .string()
-      .max(50, 'Maximo 50 caracteres'),
-    users: yup
-      .array(),
-    active: yup
-      .boolean()
-      .required()
-      .default(true)
-})
+export const companyRules = {
+  name: [{
+    required: true, 
+    message: 'Informe um nome da companhia'
+  }, {
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  nick_name: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  national_identifier: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  state_identifier: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  municipal_identifier: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  address: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  complement: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  district: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  zip_code: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  city: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  phone: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  cellphone: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  email: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }],
+  contact: [{
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }]
+}
