@@ -87,14 +87,14 @@ const CustomForm = (props: ICustomForm) => {
 
       <Spin tip="Aguarde" spinning={rendering}>
         <Form
-          labelCol={{ span: 6 }}
-          wrapperCol={{ span: 18 }}
+          //labelCol={{ span: 2 }}
+          //wrapperCol={{ span: 18 }}
           initialValues={data}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off">
             { props.children }
-          <Form.Item wrapperCol={{ offset: 6, span: 6 }}>
+          <Form.Item /*wrapperCol={{ offset: 6, span: 6 }}*/>
             <Button type="primary" htmlType="submit" 
               icon={rendering ? <LoadingOutlined /> : <CheckOutlined />}>
               Salvar

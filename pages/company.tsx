@@ -13,30 +13,82 @@ const Company = () => {
     <CustomMenu>
       <CustomForm list='companies' create={CREATE_COMPANY} update={UPDATE_COMPANY} 
         get={GET_COMPANY} defaultData={ICompanyDefault}>
+        <Row>
+          <Col flex={1}>
+            <TextInput 
+              label='Nome' 
+              property="name"
+              rules={companyRules.name}
+            />
+          </Col>
+          <Col flex={1}>
+            <TextInput 
+              label='Nome fantasia' 
+              property="nick_name"
+              rules={companyRules.nick_name}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col flex={1}>
+            <TextInput 
+              label='CNPJ' 
+              property="national_identifier"
+              rules={companyRules.national_identifier}
+            />
+          </Col>
+          <Col flex={1}>
+            <TextInput 
+              label='Inscricao estadual' 
+              property="state_identifier"
+              rules={companyRules.state_identifier}
+            />
+          </Col>
+          <Col flex={1}>
+            <TextInput 
+              label='Inscricao municipal' 
+              property="municipal_identifier"
+              rules={companyRules.municipal_identifier}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col flex={1}>
+            <TextInput 
+              label='Endereco' 
+              property="address"
+              rules={companyRules.address}
+            />
+          </Col>
+          <Col flex={1}>
+            <TextInput 
+              label='Complemento' 
+              property="complement"
+              rules={companyRules.complement}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col flex={1}>
+            
+          </Col>
+          <Col flex={1}>
+            
+          </Col>
+          <Col flex={1}>
+            
+          </Col>
+        </Row>
+        <Row>
+          <Col flex={1}>
+            
+          </Col>
+          <Col flex={1}>
+            
+          </Col>
+        </Row>
 
-        <TextInput 
-          label='Nome' 
-          property="name"
-          rules={companyRules.name}
-        />
-
-        <TextInput 
-          label='Nome fantasia' 
-          property="nick_name"
-          rules={companyRules.nick_name}
-        />
-
-        <TextInput 
-          label='CNPJ' 
-          property="national_identifier"
-          rules={companyRules.national_identifier}
-        />
-
-        <TextInput 
-          label='Inscricao estadual' 
-          property="state_identifier"
-          rules={companyRules.state_identifier}
-        />
+        
         
         <SwitchInput 
           label='Ativo' 
