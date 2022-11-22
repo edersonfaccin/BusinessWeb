@@ -1,16 +1,43 @@
-import React from 'react';
-import { Breadcrumb, Button, Form, Spin } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Breadcrumb, Button, Form, message, Spin } from 'antd';
 import { CheckOutlined, LoadingOutlined } from '@ant-design/icons';
-import router from 'next/router'
+import { useRouter } from 'next/router'
+import { useMutation, useQuery } from '@apollo/client';
 
 interface ICustomForm {
   children: any
-  rendering: boolean
-  onSave: any
   list: any
+  get: any
+  create: any
+  update: any
+  defaultData: any
 }
 
 const CustomForm = (props: ICustomForm) => {
+  const router = useRouter()
+
+  const [ data, setData ] = useState<any>(props.defaultData);
+  const [ rendering, setRendering ] = useState<boolean>(true);
+  const [ create ] = useMutation(props.create);
+  const [ update ] = useMutation(props.update);
+
+  const { loading, error, data: dataRetrieve } = router.query?._id ? useQuery(props.get, { 
+    variables: { 
+      _id: router.query?._id
+    }
+  }) : { loading: false, error: null, data: null };
+
+  useEffect(() => {
+    setRendering(true)
+
+    if(router.query?._id){
+      setData(dataRetrieve ? dataRetrieve[Object.keys(dataRetrieve)[0]] : props.defaultData)
+    }
+
+    setTimeout(() => {
+      setRendering(false)
+    }, 1500);
+  }, [loading])
     
   const onGoToList = () => {
     router.push({
@@ -24,6 +51,29 @@ const CustomForm = (props: ICustomForm) => {
     })
   }
 
+  const onFinish = (values: any) => {
+    try {
+      setRendering(true)
+
+      if(router.query?._id){
+        update({variables: { ...values, ...{_id: router.query?._id} }});
+      }else{
+        create({variables: { ...values }});
+      }
+
+      setRendering(false)
+      router.back()
+    } catch (error) {
+      message.error(error?.toString());
+    }
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+
+  if(rendering) return null
+
   return (
     <>
       <Breadcrumb separator=">" style={{
@@ -35,25 +85,23 @@ const CustomForm = (props: ICustomForm) => {
           <Breadcrumb.Item>Cadastro</Breadcrumb.Item>
       </Breadcrumb>
 
-      <Form
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 14 }}
-        layout="horizontal"
-        size={"middle"}>
-          {
-            <Spin tip="Aguarde" spinning={props.rendering}>
-              { props.children }
-            </Spin>
-          }
-        <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
-          <Button 
-            type="primary" 
-            icon={props.rendering ? <LoadingOutlined /> : <CheckOutlined />}
-            onClick={props.onSave}>
-            Salvar
-          </Button>
-        </Form.Item>
-      </Form>
+      <Spin tip="Aguarde" spinning={rendering}>
+        <Form
+          //labelCol={{ span: 2 }}
+          //wrapperCol={{ span: 18 }}
+          initialValues={data}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off">
+            { props.children }
+          <Form.Item /*wrapperCol={{ offset: 6, span: 6 }}*/>
+            <Button type="primary" htmlType="submit" 
+              icon={rendering ? <LoadingOutlined /> : <CheckOutlined />}>
+              Salvar
+            </Button>
+          </Form.Item>
+        </Form>
+      </Spin>
     </>
   );
 };

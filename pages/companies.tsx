@@ -47,25 +47,31 @@ const Companies = () => {
 
   const columns = [{
     title: 'Name',
-    dataIndex: 'name'
+    dataIndex: 'name',
+    key: 'name'
   }, {
     title: 'Nome fantasia',
-    dataIndex: 'nick_name'
+    dataIndex: 'nick_name',
+    key: 'nick_name'
   }, {
     title: 'Endereco',
-    dataIndex: 'address'
+    dataIndex: 'address',
+    key: 'address'
   }, {
     title: 'Cidade',
-    dataIndex: 'city'
+    dataIndex: 'city',
+    key: 'city'
   }, {
     title: 'Active',
     dataIndex: 'active',
+    key: 'active',
     render: (active: boolean) => {
       return active ? <Tag color="green">Sim</Tag> : <Tag color="red">Nao</Tag>
     }
   }, {
     title: 'Date register',
     dataIndex: 'date_register',
+    key: 'date_register',
     render: (date_register: Date) => {
       if(date_register) return format(new Date(date_register), 'dd/MM/uuuu HH:mm')
 

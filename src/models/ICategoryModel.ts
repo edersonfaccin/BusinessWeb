@@ -1,10 +1,7 @@
-import * as yup from 'yup'
-
-export interface ICategoryModel {
+interface ICategoryModel {
     _id: string,
     name: string,
-    active: boolean,
-    //idcompany: string
+    active: boolean
 }
 
 export const ICategoryDefault = <ICategoryModel> {
@@ -13,13 +10,12 @@ export const ICategoryDefault = <ICategoryModel> {
     active: true
 }
 
-export const categoryValidationSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required('Nome da categoria é obrigatório')
-      .max(50, 'Maximo 50 caracteres'),
-    active: yup
-      .boolean()
-      .required()
-      .default(true)
-})
+export const categoryRules = {
+  name: [{
+    required: true, 
+    message: 'Informe um nome da categoria'
+  }, {
+    max: 50,
+    message: 'Maximo 50 caracateres'
+  }]
+}
