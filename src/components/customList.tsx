@@ -74,7 +74,7 @@ const CustomList = (props: ICustomList) => {
 
   const columns: ColumnsType<any> = [{
     title: 'Edit',
-    key: 'action',
+    key: 'action1',
     render: (_: any, record: any) => (
       <Space size="small">
         <EditOutlined onClick={() => onEdit(record)} style={{
@@ -87,7 +87,7 @@ const CustomList = (props: ICustomList) => {
     ...props.columns,
   {
     title: 'Remove',
-    key: 'action',
+    key: 'action2',
     render: (_: any, record: any) => (
       <Space size="small">
         <DeleteOutlined onClick={() => onRemove(record)} style={{
@@ -146,12 +146,14 @@ const CustomList = (props: ICustomList) => {
 
   return (
     <>
-      <Breadcrumb separator=">" style={{
-            paddingBottom: 24,
-            cursor: 'pointer'
-          }}>
-          <Breadcrumb.Item onClick={onGoToHome}>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>Lista</Breadcrumb.Item>
+      <Breadcrumb 
+        separator=">" 
+        style={{
+          paddingBottom: 24,
+          cursor: 'pointer'
+        }}>
+        <Breadcrumb.Item onClick={onGoToHome}>Home</Breadcrumb.Item>
+        <Breadcrumb.Item>Lista</Breadcrumb.Item>
       </Breadcrumb>
       <Space style={{ marginBottom: 16 }}>
           <Button 
@@ -180,7 +182,7 @@ const CustomList = (props: ICustomList) => {
 
       <Table 
         columns={columns} 
-        dataSource={records}
+        dataSource={records.map((obj: any, idx: number) => ({ ...obj, key: idx }))}
         loading={loading}
         pagination={false}
       />

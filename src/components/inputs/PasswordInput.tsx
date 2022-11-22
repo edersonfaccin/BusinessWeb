@@ -8,24 +8,26 @@ const { Text } = Typography;
 const PasswordInput = (props: IInput) => {
 
     return (
-        <Form.Item 
-            label={props.label}
-            colon={false}
-            rules={[{
-                required: props.required || false,
-            }]}>
-                <Input 
-                    prefix={<LockOutlined />}
-                    value={props.value} 
-                    type={'password'}
-                    onChange={props.onChange}
-                />
-                {
-                    props?.textError && props?.invalid ? (
-                        <Text type="danger">{props?.textError}</Text>
-                    ) : null
-                }
-        </Form.Item>
+        <>
+            <Text>{props.label}</Text>
+            <Form.Item 
+                style={{
+                    flexDirection: 'column',
+                    paddingRight: 2
+                }}
+                //label={props.label}
+                colon={false}
+                name={props.property}
+                rules={props.rules}>
+                    <Input 
+                        prefix={<LockOutlined />}
+                        type={'password'}
+                        style={{
+                            borderRadius: 10
+                        }}
+                    />
+            </Form.Item>
+        </>
     )
 };
   

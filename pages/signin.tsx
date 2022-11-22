@@ -11,7 +11,7 @@ const { Content } = Layout;
 const SignIn = () => {
     const router = useRouter()
     
-    const [ data, setData ] = useState<any>(ISignInDefault);
+    //const [ data, setData ] = useState<any>(ISignInDefault);
     const { signIn } = useAuthData()
 
     const onCreateAccount = () => {
@@ -22,7 +22,7 @@ const SignIn = () => {
 
     const onSave = async(values: any) => {
         const { email, password } = values || { email: '', password: '' }
-
+console.log(111, values)
         try {
             await signIn(email!, password!)
         } catch (error) {
@@ -46,7 +46,7 @@ const SignIn = () => {
                         name="basic"
                         labelCol={{ span: 6 }}
                         wrapperCol={{ span: 16 }}
-                        initialValues={{ email: '', password: '' }}
+                        initialValues={ISignInDefault}
                         onFinish={onSave}
                         onFinishFailed={onFinishFailed}
                         autoComplete="off">
