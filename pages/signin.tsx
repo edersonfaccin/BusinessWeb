@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form, Layout } from 'antd';
 import { ISignInDefault, signinRules } from '../src/models/ISignInModel'
 import EmailInput from '../src/components/inputs/EmailInput';
@@ -11,7 +11,6 @@ const { Content } = Layout;
 const SignIn = () => {
     const router = useRouter()
     
-    //const [ data, setData ] = useState<any>(ISignInDefault);
     const { signIn } = useAuthData()
 
     const onCreateAccount = () => {
@@ -22,7 +21,7 @@ const SignIn = () => {
 
     const onSave = async(values: any) => {
         const { email, password } = values || { email: '', password: '' }
-console.log(111, values)
+
         try {
             await signIn(email!, password!)
         } catch (error) {
@@ -39,11 +38,15 @@ console.log(111, values)
             <Content
                 className="site-layout-background"
                 style={{
-                    margin: '0% 15% 0% 15%',
-                    paddingTop: 200
+                    paddingTop: 200,
+                    alignItems: 'center'
                 }}>
                     <Form
                         name="basic"
+                        style={{
+                            width: '50%',
+                            marginLeft: '30%'
+                        }}
                         labelCol={{ span: 6 }}
                         wrapperCol={{ span: 16 }}
                         initialValues={ISignInDefault}

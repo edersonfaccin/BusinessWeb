@@ -3,6 +3,7 @@ import { Breadcrumb, Button, Form, message, Spin } from 'antd';
 import { CheckOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 import { useMutation, useQuery } from '@apollo/client';
+import useAuthData from '../data/hook/useAuthData';
 
 interface ICustomForm {
   children: any
@@ -15,13 +16,19 @@ interface ICustomForm {
 
 const CustomForm = (props: ICustomForm) => {
   const router = useRouter()
+  const { user } = useAuthData()
 
   const [ data, setData ] = useState<any>(props.defaultData);
   const [ rendering, setRendering ] = useState<boolean>(true);
-  const [ create ] = useMutation(props.create);
-  const [ update ] = useMutation(props.update);
+  const [ create ] = useMutation(props.create, {
+    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
+  });
+  const [ update ] = useMutation(props.update, {
+    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
+  });
 
   const { loading, error, data: dataRetrieve } = router.query?._id ? useQuery(props.get, { 
+    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
     variables: { 
       _id: router.query?._id
     }

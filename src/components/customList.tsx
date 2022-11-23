@@ -26,10 +26,10 @@ const CustomList = (props: ICustomList) => {
   const [ count, setCount ]  = useState<number>(0)
   const [ records, setRecords ] = useState<any>([])
   const [ removeRecord ] = useMutation(props.method_remove, {
-    //context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
+    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
   });
   const { loading, error, data, refetch } = useQuery(props.method_list, {
-    //context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
+    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
     variables: { 
       limit: 10, 
       offset: ((page - 1) * 10)
@@ -40,7 +40,7 @@ const CustomList = (props: ICustomList) => {
     error: errorReport, 
     data: dataReport
   }] = useLazyQuery(props.method_report, {
-    //context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
+    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
     variables: {},
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'no-cache'
