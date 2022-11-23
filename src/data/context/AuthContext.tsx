@@ -16,6 +16,7 @@ interface AuthContextProps {
     user?: ISignInModel,
     loading?: boolean,
     signIn: (email: string, password: string) => Promise<void>,
+    signOut: () => void,
     errorMessage?: string
 }
 
@@ -44,6 +45,15 @@ export const AuthProvider = ({ children }: any) => {
     const [ loading, setLoading ] = useState<boolean>(false)
     const [ errorMessage, setErrorMessage ] = useState<string>()
     const [ login ] = useMutation(LOGIN_USER);
+
+    const signOut = () => {
+        Cookies.remove('@BusinessApp:_id');
+        Cookies.remove('@BusinessApp:name');
+        Cookies.remove('@BusinessApp:email');
+        Cookies.remove('@BusinessApp:access_token');
+
+        route.push('/signin')
+    }
 
     const signIn = async(email: string, password: string) => {
         const data = {
@@ -85,6 +95,7 @@ export const AuthProvider = ({ children }: any) => {
             user,
             loading,
             signIn,
+            signOut,
             errorMessage
         }}>
             { children }
