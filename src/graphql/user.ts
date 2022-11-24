@@ -1,5 +1,36 @@
 import { gql } from '@apollo/client';
 
+export const REPORT_USERS = gql`
+  query{
+    users{
+      name
+      email
+      active
+      date_register
+    }
+  }
+`;
+
+export const LIST_USERS = gql`
+  query userspage($limit: Float!, $offset: Float!) {
+    userspage(
+      listUserInput: {
+        limit: $limit,
+        offset: $offset
+      }
+    ) {
+      results {
+        _id
+        name
+        email
+        date_register
+        active
+      }
+      count
+    }
+  }
+`;
+
 export const CREATE_USER = gql`
   mutation createUser($name: String!, $email: String!, $password: String!) {
     createUser(
@@ -60,6 +91,14 @@ export const GET_USER = gql`
       password
       active
       date_register
+    }
+  }
+`;
+
+export const REMOVE_USER = gql`
+  mutation removeUser($_id: String!){
+    removeUser(_id: $_id){
+      _id
     }
   }
 `;

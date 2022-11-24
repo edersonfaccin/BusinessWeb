@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, MonitorOutlined, 
   BgColorsOutlined, CodeSandboxOutlined,
   DeploymentUnitOutlined, UngroupOutlined, GroupOutlined,
-  MoneyCollectOutlined } from '@ant-design/icons';
+  MoneyCollectOutlined, 
+  StrikethroughOutlined} from '@ant-design/icons';
 import { Button, Col, Layout, Menu, Row, Typography } from 'antd';
 import router from 'next/router'
 import Head from 'next/head';
@@ -92,6 +93,19 @@ export default function CustomMenu(props: any) {
                 key: 'group-fiscal',
                 icon: <MonitorOutlined />,
                 label: 'Fiscal',
+                children: [{ 
+                  key: 'countrys',
+                  icon: <StrikethroughOutlined />,
+                  label: 'Paises'
+                }, {
+                  key: 'states',
+                  icon: <StrikethroughOutlined />,
+                  label: 'Estados'
+                }, {
+                  key: 'citys',
+                  icon: <StrikethroughOutlined />,
+                  label: 'Cidades'
+                }]
               }]}
             />
           </Sider>

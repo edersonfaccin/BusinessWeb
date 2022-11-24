@@ -5,7 +5,8 @@ import TextInput from '../src/components/inputs/TextInput';
 import CustomMenu from '../src/utils/customMenu';
 import { companyRules, ICompanyDefault } from '../src/models/ICompanyModel';
 import { CREATE_COMPANY, GET_COMPANY, UPDATE_COMPANY } from '../src/graphql/company';
-import { Col, Row } from 'antd';
+import { Button, Col, Row } from 'antd';
+import { UserAddOutlined } from '@ant-design/icons';
 
 const Company = () => {
   
@@ -13,6 +14,14 @@ const Company = () => {
     <CustomMenu>
       <CustomForm list='companies' create={CREATE_COMPANY} update={UPDATE_COMPANY} 
         get={GET_COMPANY} defaultData={ICompanyDefault}>
+        <Row>
+          <Col flex={1}>
+            <Button type="primary" htmlType="submit" 
+              icon={<UserAddOutlined />}>
+                Gerenciar usuarios
+            </Button>
+          </Col>
+        </Row>
         <Row>
           <Col flex={1}>
             <TextInput 
@@ -70,25 +79,59 @@ const Company = () => {
         </Row>
         <Row>
           <Col flex={1}>
-            
+            <TextInput 
+              label='Bairro' 
+              property="district"
+              rules={companyRules.district}
+            />
           </Col>
           <Col flex={1}>
-            
+            <TextInput 
+              label='CEP' 
+              property="zip_code"
+              rules={companyRules.zip_code}
+            />
           </Col>
           <Col flex={1}>
-            
+            <TextInput 
+              label='Cidade' 
+              property="city"
+              rules={companyRules.city}
+            />
           </Col>
         </Row>
         <Row>
           <Col flex={1}>
-            
+            <TextInput 
+              label='Fone' 
+              property="phone"
+              rules={companyRules.phone}
+            />
           </Col>
           <Col flex={1}>
-            
+            <TextInput 
+              label='Celular' 
+              property="cellphone"
+              rules={companyRules.cellphone}
+            />
           </Col>
         </Row>
-
-        
+        <Row>
+          <Col flex={1}>
+            <TextInput 
+              label='Email' 
+              property="email"
+              rules={companyRules.email}
+            />
+          </Col>
+          <Col flex={1}>
+            <TextInput 
+              label='Contato' 
+              property="contact"
+              rules={companyRules.contact}
+            />
+          </Col>
+        </Row>
         
         <SwitchInput 
           label='Ativo' 
