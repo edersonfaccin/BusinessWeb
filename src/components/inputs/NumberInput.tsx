@@ -1,18 +1,27 @@
 import React from 'react';
-import { Form, InputNumber } from 'antd';
+import { Form, InputNumber, Typography } from 'antd';
 import { IInput } from '../../interfaces/IForm';
-  
+
+const { Text } = Typography;
+
 const NumberInput = (props: IInput) => {
     
     return (
-        <Form.Item 
-            label={props.label}
-            colon={false}
-            rules={[{
-                required: props.required,
-            }]}>
-            <InputNumber />
-        </Form.Item>
+        <>
+            <Text>{props.label}</Text>
+            <Form.Item 
+                style={{
+                    flexDirection: 'column',
+                    paddingRight: 2
+                }}
+                colon={false}
+                name={props.property}
+                rules={props.rules}>
+                <InputNumber style={{
+                    borderRadius: 10
+                }}/>
+            </Form.Item>
+        </>
     );
 };
   

@@ -19,6 +19,11 @@ const State = () => {
           property="name"
           rules={stateRules.name}
         />
+        <TextInput 
+          label='UF' 
+          property="uf"
+          rules={stateRules.uf}
+        />
         <SelectInput 
           label='Pais' 
           property="idcountry"

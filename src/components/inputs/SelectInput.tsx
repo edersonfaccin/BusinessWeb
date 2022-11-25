@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, message, Select, Typography } from 'antd';
+import { Divider, Form, message, Pagination, Select, Typography } from 'antd';
 import { ISelect } from '../../interfaces/IForm';
 import useAuthData from '../../data/hook/useAuthData';
 import { useQuery } from '@apollo/client';
@@ -41,11 +41,27 @@ const SelectInput = (props: ISelect) => {
           name={props.property}
           colon={false}
           rules={props.rules}>
-          <Select>
+          <Select
+          dropdownRender={menu => (
+            <div>
+              {menu}
+              <Divider style={{ margin: "4px 0" }} />
+              <div style={{ padding: "8px", textAlign: "center" }}>
+                <Pagination
+                  simple
+                  current={page}
+                  total={count}
+                  onChange={pageIndex => {
+                    setPage(pageIndex)
+                  }}
+                />
+              </div>
+            </div>
+          )}>
             {
               records.map((item: any, idx: number) => {
                 return  (
-                  <Select.Option value={item.value} key={idx}>{item[props.description]}</Select.Option>
+                  <Select.Option value={item._id} key={idx}>{item[props.description]}</Select.Option>
                 )
               })
             }

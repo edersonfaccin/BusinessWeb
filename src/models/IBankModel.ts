@@ -1,27 +1,27 @@
-interface ICityModel {
+interface IBankModel {
     _id: string,
     name: string,
-    idstate: string,
+    code: number,
     active: boolean
 }
 
-export const ICityDefault = <ICityModel> {
+export const IBankDefault = <IBankModel> {
     _id: '',
     name: '',
-    idstate: '',
+    code: 0,
     active: true
 }
 
-export const cityRules = {
+export const bankRules = {
   name: [{
     required: true, 
-    message: 'Informe um nome da cidade'
+    message: 'Informe um nome da banco'
   }, {
     max: 50,
     message: 'Maximo 50 caracateres'
   }],
-  idstate: [{
+  code: [{
     required: true, 
-    message: 'Informe um estado'
+    message: 'Informe um codigo da banco'
   }]
 }

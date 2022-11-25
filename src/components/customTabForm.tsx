@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Breadcrumb, Button, Form, message, Spin } from 'antd';
+import { Breadcrumb, Button, Form, message, Spin, Tabs } from 'antd';
 import { CheckOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 import { useMutation, useQuery } from '@apollo/client';
 import useAuthData from '../data/hook/useAuthData';
 
-interface ICustomForm {
+export interface ITab  {
+  label: string
+  key: string
   children: any
+}
+
+interface ICustomTabForm {
+  tabs: ITab[]
   list: any
   get: any
   create: any
@@ -14,7 +20,7 @@ interface ICustomForm {
   defaultData: any
 }
 
-const CustomForm = (props: ICustomForm) => {
+const CustomTabForm = (props: ICustomTabForm) => {
   const router = useRouter()
   const { user } = useAuthData()
 
@@ -98,7 +104,10 @@ const CustomForm = (props: ICustomForm) => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off">
-            { props.children }
+            <Tabs
+              tabPosition={'left'}
+              items={props.tabs}
+            />
           <Form.Item>
             <Button type="primary" htmlType="submit" 
               icon={rendering ? <LoadingOutlined /> : <CheckOutlined />}>
@@ -111,4 +120,4 @@ const CustomForm = (props: ICustomForm) => {
   );
 };
 
-export default CustomForm;
+export default CustomTabForm;

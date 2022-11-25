@@ -89,8 +89,12 @@ export default function CustomMenu(props: any) {
                 key: 'group-finance',
                 icon: <MoneyCollectOutlined />,
                 label: 'Financeiro',
+                children: [{ 
+                  key: 'banks',
+                  icon: <StrikethroughOutlined />,
+                  label: 'Bancos'
+                }]
               }, {
-                
                 key: 'group-fiscal',
                 icon: <MonitorOutlined />,
                 label: 'Fiscal',

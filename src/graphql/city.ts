@@ -4,7 +4,7 @@ export const REPORT_CITIES = gql`
   query{
     cities{
       name
-      idcity
+      idstate
       active
       date_register
     }
@@ -14,7 +14,7 @@ export const REPORT_CITIES = gql`
 export const LIST_CITIES = gql`
   query citiespage($limit: Float!, $offset: Float!) {
     citiespage(
-      listStateInput: {
+      listCityInput: {
         limit: $limit,
         offset: $offset
       }
@@ -22,7 +22,7 @@ export const LIST_CITIES = gql`
       results {
         _id
         name
-        idcity
+        idstate
         date_register
         active
       }
@@ -36,7 +36,7 @@ export const GET_CITY = gql`
     city(_id: $_id){
       _id
       name
-      idcity
+      idstate
       active
       date_register
     }
@@ -44,16 +44,16 @@ export const GET_CITY = gql`
 `;
 
 export const CREATE_CITY = gql`
-  mutation createCity($name: String!, $idcity: String!, $active: Boolean!) {
+  mutation createCity($name: String!, $idstate: String!, $active: Boolean!) {
     createCity(
       data: {
         name: $name,
-        idcity: $idcity,
+        idstate: $idstate,
         active: $active
       }) {
         _id
         name
-        idcity
+        idstate
         active
         date_register
     }
@@ -61,18 +61,18 @@ export const CREATE_CITY = gql`
 `;
 
 export const UPDATE_CITY = gql`
-  mutation updateCity($_id: String!, $name: String!, $idcity: String!, $active: Boolean!) {
+  mutation updateCity($_id: String!, $name: String!, $idstate: String!, $active: Boolean!) {
     updateCity(
       data: {
         _id: $_id,
         name: $name,
-        idcity: $idcity,
+        idstate: $idstate,
         active: $active
       }
     ) {
       _id
       name
-      idcity
+      idstate
       active
       date_register
     }
