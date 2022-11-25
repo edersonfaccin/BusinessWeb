@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const REPORT_CATEGORYS = gql`
+export const REPORT_CATEGORIES = gql`
   query{
-    categorys{
+    categories{
       name
       active
       date_register
@@ -10,9 +10,9 @@ export const REPORT_CATEGORYS = gql`
   }
 `;
 
-export const LIST_CATEGORYS = gql`
-  query categoryspage($limit: Float!, $offset: Float!) {
-    categoryspage(
+export const LIST_CATEGORIES = gql`
+  query categoriespage($limit: Float!, $offset: Float!) {
+    categoriespage(
       listCategoryInput: {
         limit: $limit,
         offset: $offset

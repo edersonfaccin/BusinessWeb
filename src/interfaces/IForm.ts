@@ -4,15 +4,10 @@ export interface IInput {
     rules?: any[]
 }
 
-export interface IListSelect {
-    value: any
-    label: string
-}
-
 export interface ISelect {
-    collection: string
-    field: string
+    property: string
     label: string
-    required?: false
-    list: IListSelect[]
+    description: string
+    list: any
+    rules?: any[]
 }

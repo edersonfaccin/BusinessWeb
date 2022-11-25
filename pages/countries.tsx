@@ -1,11 +1,11 @@
 import React from 'react';
 import CustomList from '../src/components/customList';
-import { LIST_CATEGORYS, REMOVE_CATEGORY, REPORT_CATEGORYS } from '../src/graphql/category';
+import { LIST_COUNTRIES, REMOVE_COUNTRY, REPORT_COUNTRIES } from '../src/graphql/country';
 import CustomMenu from '../src/utils/customMenu';
 import { format } from 'date-fns';
 import { Tag } from 'antd';
 
-const Categorys = () => {
+const Countries = () => {
 
   const columnsReport = [{
     field: 'name',
@@ -52,16 +52,16 @@ const Categorys = () => {
   return (
     <CustomMenu>
       <CustomList 
-        new={'category'} 
+        new={'country'} 
         columns={columns}
-        method_list={LIST_CATEGORYS}
-        method_remove={REMOVE_CATEGORY}
-        method_report={REPORT_CATEGORYS}
+        method_list={LIST_COUNTRIES}
+        method_remove={REMOVE_COUNTRY}
+        method_report={REPORT_COUNTRIES}
         columnsReport={columnsReport}
-        titleReport={'Relatório de Categorias'}
+        titleReport={'Relatório de paises'}
       />
     </CustomMenu>
   )
 }
 
-export default Categorys
+export default Countries

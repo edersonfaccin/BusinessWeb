@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const REPORT_COMPANIES = gql`
   query{
-    companys{
+    companies{
       _id
       name
       nick_name
@@ -31,8 +31,8 @@ export const REPORT_COMPANIES = gql`
 `;
 
 export const LIST_COMPANIES = gql`
-  query companyspage($limit: Float!, $offset: Float!) {
-    companyspage(
+  query companiespage($limit: Float!, $offset: Float!) {
+    companiespage(
       listCompanyInput: {
         limit: $limit,
         offset: $offset

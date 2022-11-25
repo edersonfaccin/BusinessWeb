@@ -77,7 +77,7 @@ export default function CustomMenu(props: any) {
                   icon: <DeploymentUnitOutlined />,
                   label: 'Unidades'
                 }, {
-                  key: 'categorys',
+                  key: 'categories',
                   icon: <UngroupOutlined />,
                   label: 'Categorias'
                 }, {
@@ -90,11 +90,12 @@ export default function CustomMenu(props: any) {
                 icon: <MoneyCollectOutlined />,
                 label: 'Financeiro',
               }, {
+                
                 key: 'group-fiscal',
                 icon: <MonitorOutlined />,
                 label: 'Fiscal',
                 children: [{ 
-                  key: 'countrys',
+                  key: 'countries',
                   icon: <StrikethroughOutlined />,
                   label: 'Paises'
                 }, {
@@ -102,7 +103,7 @@ export default function CustomMenu(props: any) {
                   icon: <StrikethroughOutlined />,
                   label: 'Estados'
                 }, {
-                  key: 'citys',
+                  key: 'cities',
                   icon: <StrikethroughOutlined />,
                   label: 'Cidades'
                 }]

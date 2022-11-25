@@ -3,19 +3,19 @@ import CustomForm from '../src/components/customForm';
 import SwitchInput from '../src/components/inputs/SwitchInput';
 import TextInput from '../src/components/inputs/TextInput';
 import CustomMenu from '../src/utils/customMenu';
-import { categoryRules, ICategoryDefault } from '../src/models/ICategoryModel';
-import { CREATE_CATEGORY, GET_CATEGORY, UPDATE_CATEGORY } from '../src/graphql/category';
+import { ICountryDefault, countryRules } from '../src/models/ICountryModel';
+import { CREATE_COUNTRY, GET_COUNTRY, UPDATE_COUNTRY } from '../src/graphql/country';
 
-const Category = () => {
+const Country = () => {
 
   return (
     <CustomMenu>
-      <CustomForm list='categories' create={CREATE_CATEGORY} update={UPDATE_CATEGORY} 
-        get={GET_CATEGORY} defaultData={ICategoryDefault}>
+      <CustomForm list='countries' create={CREATE_COUNTRY} update={UPDATE_COUNTRY} 
+        get={GET_COUNTRY} defaultData={ICountryDefault}>
         <TextInput 
           label='Nome' 
           property="name"
-          rules={categoryRules.name}
+          rules={countryRules.name}
         />
         <SwitchInput 
           label='Ativo' 
@@ -26,4 +26,4 @@ const Category = () => {
   )
 }
 
-export default Category
+export default Country
