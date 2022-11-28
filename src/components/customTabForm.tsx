@@ -108,7 +108,9 @@ const CustomTabForm = (props: ICustomTabForm) => {
               tabPosition={'left'}
               items={props.tabs}
             />
-          <Form.Item>
+          <Form.Item style={{
+            float: 'right'
+          }}>
             <Button type="primary" htmlType="submit" 
               icon={rendering ? <LoadingOutlined /> : <CheckOutlined />}>
               Salvar
