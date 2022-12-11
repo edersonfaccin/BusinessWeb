@@ -21,18 +21,26 @@ const CustomForm = (props: ICustomForm) => {
   const [ data, setData ] = useState<any>(props.defaultData);
   const [ rendering, setRendering ] = useState<boolean>(true);
   const [ create ] = useMutation(props.create, {
-    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
+    context: { 
+      headers: { 
+        Authorization: `Bearer ${user?.access_token}` 
+      }
+    },
   });
   const [ update ] = useMutation(props.update, {
     context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
   });
 
-  const { loading, error, data: dataRetrieve } = router.query?._id ? useQuery(props.get, { 
-    context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
+  const { loading, error, data: dataRetrieve } = useQuery(router.query?._id ?  props.get : null, { 
+    context: { 
+      headers: { 
+        Authorization: `Bearer ${user?.access_token}` 
+      } 
+    },
     variables: { 
       _id: router.query?._id
     }
-  }) : { loading: false, error: null, data: null };
+  })
 
   useEffect(() => {
     setRendering(true)

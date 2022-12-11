@@ -189,7 +189,7 @@ const CustomList = (props: ICustomList) => {
 
       <Row justify="end">
         <Col span={12}/>
-        <Col span={12} align={"end"} style={{
+        <Col span={12} style={{
           padding: 30
         }}>
           <Pagination 

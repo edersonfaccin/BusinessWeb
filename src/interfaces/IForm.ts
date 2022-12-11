@@ -2,6 +2,7 @@ export interface IInput {
     property: any
     label?: string
     rules?: any[]
+    required?: boolean
 }
 
 export interface ISelect {

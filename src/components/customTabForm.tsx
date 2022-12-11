@@ -33,12 +33,12 @@ const CustomTabForm = (props: ICustomTabForm) => {
     context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
   });
 
-  const { loading, error, data: dataRetrieve } = router.query?._id ? useQuery(props.get, { 
+  const { loading, error, data: dataRetrieve } = useQuery(router.query?._id ? props.get : null, { 
     context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
     variables: { 
       _id: router.query?._id
     }
-  }) : { loading: false, error: null, data: null };
+  })
 
   useEffect(() => {
     setRendering(true)
