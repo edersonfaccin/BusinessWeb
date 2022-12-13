@@ -124,10 +124,12 @@ const CustomList = (props: ICustomList) => {
 
       removeRecord({variables: { _id: id }});
 
-      refetch({
-        limit: 10, 
-        offset: 0
-      })
+      setTimeout(() => {
+        refetch({
+          limit: 10, 
+          offset: 0
+        })
+      }, 500);
     } catch (error) {
       hideModal()
       message.error(error?.toString());

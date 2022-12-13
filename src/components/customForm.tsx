@@ -31,7 +31,8 @@ const CustomForm = (props: ICustomForm) => {
     context: { headers: { Authorization: `Bearer ${user?.access_token}` } },
   });
 
-  const { loading, error, data: dataRetrieve } = useQuery(router.query?._id ?  props.get : null, { 
+
+  const { loading, error, data: dataRetrieve } = router.query?._id ? useQuery(props.get, { 
     context: { 
       headers: { 
         Authorization: `Bearer ${user?.access_token}` 
@@ -40,7 +41,7 @@ const CustomForm = (props: ICustomForm) => {
     variables: { 
       _id: router.query?._id
     }
-  })
+  }) : { loading: false, error: undefined, data: undefined }
 
   useEffect(() => {
     setRendering(true)
